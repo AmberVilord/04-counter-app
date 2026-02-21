@@ -20,7 +20,7 @@ const closeCelebrationModalButton = document.getElementById("closeCelebrationMod
 const replayCelebrationButton = document.getElementById("replayCelebrationButton");
 
 // We use const because this goal value should stay fixed.
-const ATTENDANCE_GOAL = 50;
+const ATTENDANCE_GOAL = 60;
 // We use const because this key name should stay the same in localStorage.
 const STORAGE_KEY = "summitCheckInData";
 // We use const because these team labels are fixed choices.
