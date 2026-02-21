@@ -4,100 +4,139 @@
 
 body {
   margin: 0;
-  font-family: 'Nunito', sans-serif;
-  background: #2B1D1B;
-  color: #F3F1ED;
-  text-align: center;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #1a2a3a;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px;
 }
 
 h1 {
-  font-family: 'Poppins', sans-serif;
-  color: #F3F1ED;
-  margin-bottom: 32px;
-  font-size: 52px;
+  margin: 0 0 16px;
+  text-align: center;
 }
 
-h1 i {
-  margin-right: 16px;
-  font-size: 42px;
+h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
 }
 
-.count-display {
-  width: 95%;
-  max-width: 600px;
-  background-color: rgba(31, 27, 26, 0.95);
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  margin: 0 auto;
-  border: 1px solid rgba(243, 241, 237, 0.1);
+.panel {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-#count {
-  font-size: 96px;
-  font-weight: 600;
-  color: #F3F1ED;
-  display: block;
-  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
-  font-family: 'Poppins', sans-serif;
+.total-line {
+  margin: 0 0 10px;
+  font-weight: bold;
 }
 
-.label {
-  color: #F3F1ED;
-  font-size: 24px;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  font-family: 'Nunito', sans-serif;
+.progress-track {
+  width: 100%;
+  height: 20px;
+  border-radius: 999px;
+  background: #dce6f3;
+  overflow: hidden;
 }
 
-.buttons {
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: #2d7ff9;
+  transition: width 0.25s ease;
+}
+
+.celebration {
+  min-height: 24px;
+  margin: 10px 0 0;
+  font-weight: bold;
+  color: #0f766e;
+}
+
+.greeting {
+  margin: 0 0 10px;
+}
+
+.checkin-form {
   display: flex;
-  gap: 32px;
-  justify-content: center;
-  margin-top: 48px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+input,
+select,
+button {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+input,
+select {
+  border: 1px solid #b7c7dc;
+  flex: 1;
+  min-width: 180px;
 }
 
 button {
-  font-family: 'Nunito', sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  padding: 24px 48px;
   border: none;
-  border-radius: 16px;
+  background: #2d7ff9;
+  color: #ffffff;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  min-width: 200px;
 }
 
-.capacity-warning {
-  margin-top: 32px;
-  font-size: 18px;
-  opacity: 0.7;
-  font-family: 'Nunito', sans-serif;
+button:hover {
+  background: #1f69d5;
 }
 
-#decrease {
-  background: #EF8354;
-  color: #F3F1ED;
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
 }
 
-#increase {
-  background: #00BFA5;
-  color: #F3F1ED;
+.team-card {
+  border: 2px solid #c6d7ee;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  background: #f8fbff;
 }
 
-#decrease:hover {
-  background-color: #d96f3f;
+.team-card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 16px;
 }
 
-#decrease:active {
-  transform: scale(0.95);
+.team-count {
+  font-size: 28px;
+  margin: 0;
+  font-weight: bold;
 }
 
-#increase:hover {
-  background-color: #009882;
+.winner {
+  border-color: #0f766e;
+  background: #e8f7f5;
 }
 
-#increase:active {
-  transform: scale(0.95);
+.attendee-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.attendee-list li {
+  background: #f8fbff;
+  border: 1px solid #d6e3f3;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
 }
