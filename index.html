@@ -4,11 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sustainability Summit Check-In</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <video class="light-mode-video-bg" autoplay loop muted playsinline>
+    <source src="https://www.shutterstock.com/shutterstock/videos/3851428755/preview/stock-footage-this-blue-circuit-board-with-microchip-is-perfect-for-technology-themed-designs-and-digital.webm" type="video/webm" />
+  </video>
+  <div class="light-mode-overlay"></div>
+
   <main class="container">
-    <h1>Team Sustainability Summit Check-In</h1>
+    <header class="page-header">
+      <a href="https://www.intel.com/" target="_blank" rel="noopener">
+        <img src="https://ambervilord.github.io/02-prj-intel-sustainability/img/intel-header-logo.svg" alt="Intel Logo" class="intel-logo" />
+      </a>
+      <h1 class="page-title">Sustainability Check-In Tracker</h1>
+      <p class="subtitle">A Journey Through Innovation and Attendance Excellence</p>
+    </header>
 
     <section class="panel">
       <h2>Attendance Progress</h2>
@@ -63,6 +75,16 @@
       <ul id="attendeeList" class="attendee-list"></ul>
     </section>
   </main>
+
+  <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+
+  <div id="celebrationModal" class="celebration-modal" aria-hidden="true">
+    <div class="celebration-card">
+      <h2 class="celebration-title">Summit Milestone Reached</h2>
+      <p id="celebrationPopupText" class="celebration-popup-text"></p>
+      <button id="closeCelebrationModal" type="button">Close</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

@@ -13,6 +13,10 @@ const powerCount = document.getElementById("powerCount");
 const waterCard = document.getElementById("waterCard");
 const zeroCard = document.getElementById("zeroCard");
 const powerCard = document.getElementById("powerCard");
+const confettiLayer = document.getElementById("confettiLayer");
+const celebrationModal = document.getElementById("celebrationModal");
+const celebrationPopupText = document.getElementById("celebrationPopupText");
+const closeCelebrationModalButton = document.getElementById("closeCelebrationModal");
 
 // We use const because this goal value should stay fixed.
 const ATTENDANCE_GOAL = 50;
@@ -32,7 +36,8 @@ let appState = {
     zero: 0,
     power: 0
   },
-  attendees: []
+  attendees: [],
+  celebrationShown: false
 };
 
 function loadState() {
@@ -42,7 +47,12 @@ function loadState() {
     let parsed = JSON.parse(saved);
 
     if (parsed && parsed.teams && parsed.attendees) {
-      appState = parsed;
+      appState.total = parsed.total || 0;
+      appState.teams.water = parsed.teams.water || 0;
+      appState.teams.zero = parsed.teams.zero || 0;
+      appState.teams.power = parsed.teams.power || 0;
+      appState.attendees = parsed.attendees;
+      appState.celebrationShown = Boolean(parsed.celebrationShown);
     }
   }
 }
@@ -118,15 +128,27 @@ function updateWinningTeamHighlight() {
 function renderCelebration() {
   if (appState.total >= ATTENDANCE_GOAL) {
     let winners = getWinningTeams();
+    let popupText = "";
 
     if (winners.length === 1) {
       celebrationMessage.textContent = "Goal reached! " + TEAM_LABELS[winners[0]] + " is leading the summit!";
+      popupText = "congradulations to Team " + TEAM_LABELS[winners[0]] + " for leading the summit in attendance!";
     } else if (winners.length > 1) {
       celebrationMessage.textContent = "Goal reached! It's a tie between " + winners.map(function (teamKey) {
         return TEAM_LABELS[teamKey];
       }).join(" and ") + ".";
+      popupText = "congradulations to Teams " + winners.map(function (teamKey) {
+        return TEAM_LABELS[teamKey];
+      }).join(" and ") + " for leading the summit in attendance!";
     } else {
       celebrationMessage.textContent = "Goal reached! Great job, teams!";
+      popupText = "congradulations to Team Intel for leading the summit in attendance!";
+    }
+
+    if (!appState.celebrationShown) {
+      showCelebrationPopup(popupText);
+      appState.celebrationShown = true;
+      saveState();
     }
 
     updateWinningTeamHighlight();
@@ -136,6 +158,48 @@ function renderCelebration() {
     zeroCard.classList.remove("winner");
     powerCard.classList.remove("winner");
   }
+}
+
+function showCelebrationPopup(messageText) {
+  celebrationPopupText.textContent = messageText;
+  celebrationModal.classList.add("active");
+  celebrationModal.setAttribute("aria-hidden", "false");
+  launchConfetti();
+}
+
+function closeCelebrationPopup() {
+  celebrationModal.classList.remove("active");
+  celebrationModal.setAttribute("aria-hidden", "true");
+}
+
+function launchConfetti() {
+  // We use const because this palette should not change while generating pieces.
+  const confettiColors = ["#0071c5", "#6db5ff", "#d8ebff", "#1e3a5f", "#ffffff"];
+
+  confettiLayer.innerHTML = "";
+
+  for (let i = 0; i < 180; i = i + 1) {
+    let piece = document.createElement("div");
+    let left = Math.random() * 100;
+    let delay = Math.random() * 0.8;
+    let duration = 2.4 + Math.random() * 2;
+    let size = 6 + Math.random() * 8;
+    let colorIndex = Math.floor(Math.random() * confettiColors.length);
+
+    piece.className = "confetti-piece";
+    piece.style.left = String(left) + "vw";
+    piece.style.backgroundColor = confettiColors[colorIndex];
+    piece.style.width = String(size) + "px";
+    piece.style.height = String(size * 1.5) + "px";
+    piece.style.animationDelay = String(delay) + "s";
+    piece.style.animationDuration = String(duration) + "s";
+
+    confettiLayer.appendChild(piece);
+  }
+
+  setTimeout(function () {
+    confettiLayer.innerHTML = "";
+  }, 5200);
 }
 
 function renderAttendees() {
@@ -186,6 +250,14 @@ form.addEventListener("submit", function (event) {
 
   form.reset();
   nameInput.focus();
+});
+
+closeCelebrationModalButton.addEventListener("click", closeCelebrationPopup);
+
+celebrationModal.addEventListener("click", function (event) {
+  if (event.target === celebrationModal) {
+    closeCelebrationPopup();
+  }
 });
 
 loadState();
