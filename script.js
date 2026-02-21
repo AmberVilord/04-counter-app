@@ -17,6 +17,7 @@ const confettiLayer = document.getElementById("confettiLayer");
 const celebrationModal = document.getElementById("celebrationModal");
 const celebrationPopupText = document.getElementById("celebrationPopupText");
 const closeCelebrationModalButton = document.getElementById("closeCelebrationModal");
+const replayCelebrationButton = document.getElementById("replayCelebrationButton");
 
 // We use const because this goal value should stay fixed.
 const ATTENDANCE_GOAL = 50;
@@ -127,23 +128,9 @@ function updateWinningTeamHighlight() {
 
 function renderCelebration() {
   if (appState.total >= ATTENDANCE_GOAL) {
-    let winners = getWinningTeams();
-    let popupText = "";
+    let popupText = getCelebrationPopupText();
 
-    if (winners.length === 1) {
-      celebrationMessage.textContent = "Goal reached! " + TEAM_LABELS[winners[0]] + " is leading the summit!";
-      popupText = "congradulations to Team " + TEAM_LABELS[winners[0]] + " for leading the summit in attendance!";
-    } else if (winners.length > 1) {
-      celebrationMessage.textContent = "Goal reached! It's a tie between " + winners.map(function (teamKey) {
-        return TEAM_LABELS[teamKey];
-      }).join(" and ") + ".";
-      popupText = "congradulations to Teams " + winners.map(function (teamKey) {
-        return TEAM_LABELS[teamKey];
-      }).join(" and ") + " for leading the summit in attendance!";
-    } else {
-      celebrationMessage.textContent = "Goal reached! Great job, teams!";
-      popupText = "congradulations to Team Intel for leading the summit in attendance!";
-    }
+    replayCelebrationButton.hidden = false;
 
     if (!appState.celebrationShown) {
       showCelebrationPopup(popupText);
@@ -154,10 +141,32 @@ function renderCelebration() {
     updateWinningTeamHighlight();
   } else {
     celebrationMessage.textContent = "";
+    replayCelebrationButton.hidden = true;
     waterCard.classList.remove("winner");
     zeroCard.classList.remove("winner");
     powerCard.classList.remove("winner");
   }
+}
+
+function getCelebrationPopupText() {
+  let winners = getWinningTeams();
+
+  if (winners.length === 1) {
+    celebrationMessage.textContent = "Goal reached! " + TEAM_LABELS[winners[0]] + " is leading the summit!";
+    return "Congratulations to " + TEAM_LABELS[winners[0]] + " for leading the summit in attendance!";
+  }
+
+  if (winners.length > 1) {
+    let teamNames = winners.map(function (teamKey) {
+      return TEAM_LABELS[teamKey];
+    }).join(" and ");
+
+    celebrationMessage.textContent = "Goal reached! It's a tie between " + teamNames + ".";
+    return "congradulations to " + teamNames + " for leading the summit in attendance!";
+  }
+
+  celebrationMessage.textContent = "Goal reached! Great job, teams!";
+  return "congradulations to Team Intel for leading the summit in attendance!";
 }
 
 function showCelebrationPopup(messageText) {
@@ -257,6 +266,12 @@ closeCelebrationModalButton.addEventListener("click", closeCelebrationPopup);
 celebrationModal.addEventListener("click", function (event) {
   if (event.target === celebrationModal) {
     closeCelebrationPopup();
+  }
+});
+
+replayCelebrationButton.addEventListener("click", function () {
+  if (appState.total >= ATTENDANCE_GOAL) {
+    showCelebrationPopup(getCelebrationPopupText());
   }
 });
 

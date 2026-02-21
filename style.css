@@ -117,6 +117,10 @@ h2 {
   color: #005a99;
 }
 
+.replay-button {
+  margin-top: 8px;
+}
+
 .greeting {
   margin: 0 0 10px;
   color: #143b63;
