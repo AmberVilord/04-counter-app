@@ -1,28 +1,98 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>CrowdKeeper</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Nunito:wght@400;600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intel Sustainability Summit Check-In</title>
+  <!-- Add Font Awesome CSS -->
+   <link
+Rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+/>
+<link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <h1><i class="fas fa-users"></i> CrowdKeeper</h1>
-  <div class="count-display">
-    <span id="count">0</span>
-    <span class="label">people inside</span>
+  <!-- Hero section with Intel branding -->
+   <div class=""hero">
+    <div class="hero-content">
+      <img src="intel-logo.png" alt="Intel Logo" class="intel-logo" />
+      <h1> Team Sustainability Summit</h1>
+      <div class="hero-divider"></div>
+      <p>
+        <i class="fas fa-leaf"></i> Check-in system for sustainability event
+        attendees
+      </p>
+    </div>
   </div>
-  <div class="buttons">
-    <button id="decrease">Exit (-1)</button>
-    <button id="increase">Enter (+1)</button>
-  </div>
-  <div class="capacity-warning">Max capacity: 50</div>
-  <script src="script.js"></script>
-</body>
+  <!-- Attendance tracking -->
+   <div class="attendance-tracker">
+       </div> class=attendance-header">
+       <i class="fas fa-users"></i>
+       Attendance: <span id="attendance-count">0</span>/50
+       <div>
+        <div class="progress-container">
+          <div class="progress-bar" class="progress-bar"></div>
+            </div>
+      </div>
+    </div class="container">
+  <!-- Feedback message -->
+    <p id="greeting"></p>
 
+    <!-- Check-in form -->
+     <form class="check-in" id="checkInForm">
+      <label for="attendeeName" Class="form-label">Attendee Check-In</label>
+      <div class="form-group">
+        <div class="input-wrapper">
+          <input
+          Type="text"
+          id="attendeeName"
+          name="attendeeName"
+          placeholder="Enter name..."
+          required
+          />
+          <select id="teamSelect" name="team" required>
+            <option value="" disabled selected>Select Team...</option>
+            <option value="water">Team Water Wise</option>
+            <option value="zero">Team Net Zero</option>
+            <option value="power">Team Renewables</option>
+          </select>
+        </div>
+        <button type="submit" id="checkInBtn">
+           <i class="fas fa-user-check"></i> Check 
+        </button>
+      </div>
+    </form>
+  
+  <!-- Team Stats -->
+    <div class="team-stats">
+     <h3>Team Attendance</h3>
+      <div class="teams-grid">
+      <div class="team-card water">
+        <span class="team-name">Team Water Wise</span>
+        <span class="team-count" id="waterCount">0</span>
+        </div>
+        <div class="team-card zero">
+          <span class=""team-name">Team Net Zero</span>
+          <span class="team-count" id="zeroCount">0</span>
+        </div>
+        <div class="team-card power">
+          <span class="team-name">Team Renewables</span>
+          <span class="team-count" id="powerCount">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer".
+    &copy; 2025 Intel Corporation. All rights reserved. 
+    <a
+    href=""http://www/intel.com/content/www/us/en/corporate-responsibility/2030-goals.html"
+    class="footer-link"
+    >Sustainability Goals</a
+    >
+
+
+    <script src="script.js"></script>
+</body>
 </html>
+
